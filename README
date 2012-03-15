@@ -1,0 +1,26 @@
+Mojolicious::Plugin::SQLiteViewerLite
+
+  Mojolicious plugin to display sqlite database information
+
+SYNOPSYS
+
+  # Mojolicious::Lite
+  plugin 'SQLiteViewerLite', dbh => $dbh;
+
+  # Mojolicious
+  $app->plugin('SQLiteViewerLite', dbh => $dbh);
+
+  # Access
+  http://localhost:3000/sqliteviewerlite
+  
+DESCRIPTION
+
+  Mojolicious::Plugin::SQLiteViewerLite is Mojolicious plugin
+  to display SQLite database information on your browser.
+
+  This module have the following features.
+
+    - Display all table names
+    - Display show create table
+    - Select * from TABLE limit 0, 1000
+    - Display primary keys and null allowed columnes in all tables.
