@@ -22,4 +22,4 @@ requires:
   Mojolicious: 2.59
   Test::More: 0
   Validator::Custom: 0.1426
-version: 0.01
+version: 0.02

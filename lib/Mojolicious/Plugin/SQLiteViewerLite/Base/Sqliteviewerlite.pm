@@ -1,4 +1,4 @@
-package Mojolicious::Plugin::SQLiteViewerLite::Controller;
+package Mojolicious::Plugin::SQLiteViewerLite::Base::Sqliteviewerlite;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub default {
@@ -9,14 +9,10 @@ sub default {
   
   my $database = $command->show_databases;
   my $current_database = $command->current_database;
-  
-  $self->stash->{template} = 'sqliteviewerlite/default'
-    unless $self->stash->{template};
 
   $self->render(
     databases => $database,
     current_database => $current_database,
-    prefix => $plugin->prefix
   );
 }
 
@@ -36,12 +32,7 @@ sub tables {
   my $database = $vresult->data->{database};
   my $tables = $command->show_tables($database);
   
-  $self->stash->{template} = 'sqliteviewerlite/tables'
-    unless $self->stash->{template};
-
   return $self->render(
-    controller => 'sqliteviewerlite',
-    prefix => $plugin->prefix,
     database => $database,
     tables => $tables
   );
@@ -69,12 +60,7 @@ sub table {
   
   my $table_def = $command->show_create_table($database, $table);
 
-  $self->stash->{template} = 'sqliteviewerlite/table'
-    unless $self->stash->{template};
-
   return $self->render(
-    controller => 'sqliteviewerlite',
-    prefix => $plugin->prefix,
     database => $database,
     table => $table, 
     table_def => $table_def,
@@ -104,12 +90,7 @@ sub showcreatetables {
     $create_tables->{$table} = $plugin->command->show_create_table($database, $table);
   }
   
-  $self->stash->{template} = 'sqliteviewerlite/showcreatetables'
-    unless $self->stash->{template};
-
   $self->render(
-    controller => 'sqliteviewerlite',
-    prefix => $plugin->prefix,
     database => $database,
     create_tables => $create_tables
   );
@@ -134,12 +115,7 @@ sub showprimarykeys {
   # Get primary keys
   my $primary_keys = $command->show_primary_keys($database);
   
-  $self->stash->{template} = 'sqliteviewerlite/showprimarykeys'
-    unless $self->stash->{template};
-
   $self->render(
-    controller => 'sqliteviewerlite',
-    prefix => $plugin->prefix,
     database => $database,
     primary_keys => $primary_keys
   );
@@ -164,12 +140,7 @@ sub shownullallowedcolumns {
   # Get null allowed columns
   my $null_allowed_columns = $command->show_null_allowed_columns($database);
   
-  $self->stash->{template} = 'sqliteviewerlite/shownullallowedcolumns'
-    unless $self->stash->{template};
-
   $self->render(
-    controller => 'sqliteviewerlite',
-    prefix => $plugin->prefix,
     database => $database,
     null_allowed_columns => $null_allowed_columns
   );
@@ -201,12 +172,7 @@ sub select {
   my $rows = $result->fetch_all;
   my $sql = $plugin->dbi->last_sql;
   
-  $self->stash->{template} = 'sqliteviewerlite/select'
-    unless $self->stash->{template};
-
   $self->render(
-    controller => 'sqliteviewerlite',
-    prefix => $plugin->prefix,
     database => $database,
     table => $table,
     header => $header,
