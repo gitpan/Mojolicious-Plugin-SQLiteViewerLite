@@ -4,10 +4,10 @@ lib/Mojolicious/Plugin/SQLiteViewerLite/Base.pm
 lib/Mojolicious/Plugin/SQLiteViewerLite/Base/Command.pm
 lib/Mojolicious/Plugin/SQLiteViewerLite/Base/Sqliteviewerlite.pm
 lib/Mojolicious/Plugin/SQLiteViewerLite/Command.pm
-lib/Mojolicious/Plugin/SQLiteViewerLite/Controller.pm
 lib/Mojolicious/Plugin/SQLiteViewerLite/Sqliteviewerlite.pm
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/layouts/sqliteviewerlite/common.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/default.html.ep
+lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/pagenavi.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/select.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/showcharsets.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/showcreatetables.html.ep
@@ -22,6 +22,7 @@ MYMETA.json
 MYMETA.yml
 README
 t/basic.t
+t/connector.t
 t/load.t
 t/test.pl
 META.yml                                 Module YAML meta-data (added by MakeMaker)

@@ -1,5 +1,6 @@
 package Mojolicious::Plugin::SQLiteViewerLite::Base::Sqliteviewerlite;
 use Mojo::Base 'Mojolicious::Controller';
+use Data::Page;
 
 sub default {
   my $self = shift;
@@ -160,24 +161,62 @@ sub select {
     ],
     table => {default => ''} => [
       'safety_name'
+    ],
+    page => {default => 1} => [
+      'uint'
+    ],
+    condition_column => [
+      'safety_name'
+    ],
+    condition_value => [
+      'not_blank'
     ]
   ];
   my $vresult = $plugin->validator->validate($params, $rule);
   my $database = $vresult->data->{database};
   my $table = $vresult->data->{table};
   
+  # Where
+  my $column = $vresult->data->{condition_column};
+  my $value = $vresult->data->{condition_value};
+  
+  my $where;
+  if (defined $column && defined $value) {
+    $where = $plugin->dbi->where;
+    $where->clause(":${column}{like}");
+    $where->param({$column => $value});
+  }
+  
+  # Limit
+  my $page = $vresult->data->{page};
+  my $count = 100;
+  my $offset = ($page - 1) * $count;
+  
   # Get null allowed columns
-  my $result = $plugin->dbi->select(table => "$database.$table", append => 'limit 0, 1000');
+  my $result = $plugin->dbi->select(
+    table => "$database.$table",
+    where => $where,
+    append => "limit $offset, $count"
+  );
   my $header = $result->header;
   my $rows = $result->fetch_all;
   my $sql = $plugin->dbi->last_sql;
+  
+  # Pager
+  my $total = $plugin->dbi->select(
+    'count(*)',
+    table => "$database.$table",
+    where => $where
+  )->value;
+  my $pager = Data::Page->new($total, $count, $page);
   
   $self->render(
     database => $database,
     table => $table,
     header => $header,
     rows => $rows,
-    sql => $sql
+    sql => $sql,
+    pager => $pager
   );
 }
 
