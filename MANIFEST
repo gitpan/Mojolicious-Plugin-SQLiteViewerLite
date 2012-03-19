@@ -14,6 +14,7 @@ lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/showcreatetab
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/showdatabaseengines.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/shownullallowedcolumns.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/showprimarykeys.html.ep
+lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/showselecttables.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/table.html.ep
 lib/Mojolicious/Plugin/SQLiteViewerLite/templates/sqliteviewerlite/tables.html.ep
 Makefile.PL

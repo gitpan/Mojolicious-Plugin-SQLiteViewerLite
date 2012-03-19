@@ -7,7 +7,7 @@ use Validator::Custom;
 use File::Basename 'dirname';
 use Cwd 'abs_path';
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 has command => sub {
   my $self = shift;
@@ -43,12 +43,14 @@ sub register {
     '#tables',
     utilities => [
       {path => 'showcreatetables', title => 'Show create tables'},
+      {path => 'showselecttables', title => 'Show select tables'},
       {path => 'showprimarykeys', title => 'Show primary keys'},
       {path => 'shownullallowedcolumns', title => 'Show null allowed columns'},
     ]
   );
   $r->get('/table')->to('#table');
   $r->get('/showcreatetables')->to('#showcreatetables');
+  $r->get('/showselecttables')->to('#showselecttables');
   $r->get('/showprimarykeys')->to('#showprimarykeys');
   $r->get('/shownullallowedcolumns')->to('#shownullallowedcolumns');
   $r->get('/showdatabaseengines')->to('#showdatabaseengines');
@@ -79,8 +81,8 @@ to display SQLite database information on browser
   plugin 'SQLiteViewerLite', dbh => $dbh, prefix => 'sqliteviewerlite2';
   
   # Route
-  my $brige = $app->route->under(sub {...});
-  plugin 'SQLiteViewerLite', dbh => $dbh, route => $brige;
+  my $bridge = $app->route->under(sub {...});
+  plugin 'SQLiteViewerLite', dbh => $dbh, route => $bridge;
 
   # Using connection manager object instead of "dbh"
   plugin 'SQLiteViewerLite', connector => DBIx::Connector->connect(...);
@@ -157,7 +159,7 @@ Router, default to C<$app->routes>.
 
 It is useful when C<under> is used.
 
-  my $b = $r->under(sub { ... });
-  plugin 'SQLiteViewerLite', dbh => $dbh, route => $b;
+  my $bridge = $r->under(sub {...});
+  plugin 'SQLiteViewerLite', dbh => $dbh, route => $bridge;
 
 =cut
