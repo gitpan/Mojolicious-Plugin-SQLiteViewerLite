@@ -1,5 +1,5 @@
 ---
-abstract: 'Mojolicious plugin'
+abstract: 'Mojolicious plugin to display SQLite database information on browser'
 author:
   - 'Yuki Kimoto <kimoto.yuki@gmail.com>'
 build_requires:
@@ -23,4 +23,4 @@ requires:
   Mojolicious: 2.59
   Test::More: 0
   Validator::Custom: 0.1426
-version: 0.06
+version: 0.07
