@@ -18,9 +18,9 @@ no_index:
     - t
     - inc
 requires:
-  DBIx::Custom: 0.24
+  DBIx::Custom: 0.25
   Data::Page: 2.02
   Mojolicious: 2.59
   Test::More: 0
   Validator::Custom: 0.1426
-version: 0.08
+version: 0.09
